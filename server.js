@@ -11,7 +11,7 @@ app.use(cors());
 
 app.use("/api/products", productRoutes);
 
-if (!process.env.MONGO_URI || !process.env.JWT_SECRET || !process.env.PORT) {
+if (!process.env.MONGO_URI || !process.env.PORT) {
   console.error("Missing required environment variables.");
   process.exit(1);
 }
