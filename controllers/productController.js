@@ -1,5 +1,5 @@
 const Product = require("../models/Product");
-const cloudinary = require("../utils/cloudinary");
+const cloudinary = require("../config/cloudinaryConfig");
 // @desc    Add a new product with an image upload
 const addProduct = async (req, res) => {
   try {
@@ -18,7 +18,7 @@ const addProduct = async (req, res) => {
           price,
           description,
           imageUrl: result.secure_url,
-          cloudinaryId: result.public_id,
+          cloudinaryId: result.public_id, 
         });
 
         await newProduct.save();
