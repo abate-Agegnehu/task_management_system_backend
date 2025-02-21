@@ -2,18 +2,16 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const connectDB = require("./config/db");
-const authRoutes = require("./routes/authRoutes");
-const taskRoutes = require("./routes/taskRoutes");
+const productRoutes = require("./routes/productRoutes");
 
 const app = express();
 connectDB();
 app.use(express.json());
 app.use(cors());
 
-app.use("/api/auth", authRoutes);
-app.use("/api/tasks", taskRoutes);
+app.use("/api/products", productRoutes);
 
-if (!process.env.MONGO_URI || !process.env.JWT_SECRET || !process.env.PORT) {
+if (!process.env.MONGO_URI ||!process.env.PORT) {
   console.error("Missing required environment variables.");
   process.exit(1);
 }
