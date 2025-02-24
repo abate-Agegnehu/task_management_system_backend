@@ -3,13 +3,14 @@ const express = require("express");
 const cors = require("cors");
 const connectDB = require("./config/db");
 const productsRoutes = require("./routes/productRoutes");
-
+const authRoutes = require("./routes/authRoutes");
 const app = express();
 connectDB();
 app.use(express.json());
 app.use(cors());
 
 app.use("/api/products", productsRoutes);
+app.use("/api/auth", authRoutes);
 
 if (!process.env.MONGO_URI || !process.env.PORT) {
   console.error("Missing required environment variables.");
