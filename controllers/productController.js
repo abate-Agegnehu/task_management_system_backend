@@ -3,7 +3,7 @@ const cloudinary = require("../config/cloudinaryConfig");
 // @desc    Add a new product with an image upload
 const addProduct = async (req, res) => {
   try {
-    const { type, price, description } = req.body;
+    const { type,description } = req.body;
 
     if (!req.file) {
       return res.status(400).json({ message: "Image is required" });
@@ -15,7 +15,6 @@ const addProduct = async (req, res) => {
 
         const newProduct = new Product({
           type,
-          price,
           description,
           imageUrl: result.secure_url,
           cloudinaryId: result.public_id, 
@@ -56,14 +55,14 @@ const getProductById = async (req, res) => {
 // @desc    Update a product (with image update)
 const updateProduct = async (req, res) => {
   try {
-    const { type, price, description } = req.body;
+    const { type, description } = req.body;
     const product = await Product.findById(req.params.id);
 
     if (!product) {
       return res.status(404).json({ message: "Product not found" });
     }
 
-    let updatedData = { type, price, description };
+    let updatedData = { type, description };
 
     if (req.file) {
       // Delete old image from Cloudinary
